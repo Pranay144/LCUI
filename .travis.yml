@@ -1,7 +1,6 @@
 dist: bionic
-language: cpp
+language: c
 compiler:
-  - clang
   - gcc
 
 before_install:
