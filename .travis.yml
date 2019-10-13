@@ -1,5 +1,5 @@
 dist: bionic
-language: c
+language: cpp
 compiler:
   - clang
   - gcc
@@ -14,7 +14,7 @@ before_script:
   - ./node_modules/.bin/commitlint-travis && ./autogen.sh
 
 script:
-  - ./configure --enable-code-coverage
+  - ./configure --enable-gcov && make && make check
   - make
   - make distcheck
   - cd test
@@ -23,4 +23,4 @@ script:
   - ../libtool --mode=execute valgrind --leak-check=full --error-exitcode=42 ./test
 
 after_success:
-  - coveralls --gcov-options '\-lp'
+  - coveralls --exclude lib --exclude tests --gcov-options '\-lp'
